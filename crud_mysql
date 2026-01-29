@@ -11,7 +11,7 @@ cursor = conexao.cursor()                       # Cria o cursor, usado para exec
 
 print('---Sistema de Cadastro em Mysql.---')
 
-nome_usuario = input('Digit seu nome: ').strip()
+nome_usuario = input('Digite seu nome: ').strip()
 
 idade_usuario = str(input('Digite sua idade: '))
 
