@@ -34,11 +34,20 @@ dados = (
     nascimento_usuario
 )
 
-cursor.execute(comando_sql,dados)  # Envia o comando SQL para o MySQL
-conexao.commit()                   # Confirma a transação.
+try:
+    cursor.execute(comando_sql, dados)
+    conexao.commit()
+    print(f"O usuário {nome_usuario} foi cadastrado com sucesso! 🎉")  # Se não der erro, usuário cadastrado. 
 
-print(f"O Usuário {nome_usuario} foi cadastrado com sucesso!🎉")
+except mysql.connector.Error as erro:
+    if erro.errno == 1062:
+        print("Usuário já cadastrado (CPF ou e-mail já existe).")
+    else:
+        print("Erro ao cadastrar usuário.")
+        print("Motivo:", erro)
 
-cursor.close()                     # Fecha o cursor.
-conexao.close()                    # Fecha a conexão com o banco de dados.
+
+finally:
+    cursor.close()                     # Fecha o cursor.
+    conexao.close()                    # Fecha a conexão com o banco de dados.
 
