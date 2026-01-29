@@ -1,13 +1,13 @@
-import mysql.connector
+import mysql.connector      # Conectar seu código Python a um banco de dados MySQL.
 
 conexao = mysql.connector.connect(
     host='localhost',
-    user='root',
+    user='root',                        # Cria uma conexão entre o Python e o banco de dados MySQL.
     password='********',
     database='meu_banco'
 )
 
-cursor = conexao.cursor()
+cursor = conexao.cursor()                       # Cria o cursor, usado para executar comandos SQL no banco de dados.
 
 print('---Sistema de Cadastro em Mysql.---')
 
@@ -15,7 +15,7 @@ nome_usuario = input('Digit seu nome: ').strip()
 
 idade_usuario = str(input('Digite sua idade: '))
 
-email_usuario = str(input('Digite o seu email: ').strip())
+email_usuario = str(input('Digite o seu email: ').strip())          # Recebe os dados do usuário.
 
 cpf_usuario = str(input('Digite o seu CPF: '))
 
@@ -23,22 +23,22 @@ celular_usuario = str(input('Digite o seu celular: '))
 
 nascimento_usuario = str(input('Digite a sua data de nascimento, AAAA-MM-DD: '))
 
-comando_sql = 'INSERT INTO usuarios (nome, idade, email, cpf,celular, nascimento) VALUES (%s,%s,%s,%s,%s,%s)'
+comando_sql = 'INSERT INTO usuarios (nome, idade, email, cpf,celular, nascimento) VALUES (%s,%s,%s,%s,%s,%s)'    # Insere um novo registro na tabela
 
 dados = (
     nome_usuario,
     idade_usuario,
-    email_usuario,
+    email_usuario,                  # Levar os valores reais para o servidor MySQL.
     cpf_usuario,
     celular_usuario,
     nascimento_usuario
 )
 
-cursor.execute(comando_sql,dados)
-conexao.commit()
+cursor.execute(comando_sql,dados)  # Envia o comando SQL para o MySQL
+conexao.commit()                   # Confirma a transação.
 
 print(f"O Usuário {nome_usuario} foi cadastrado com sucesso!🎉")
 
-cursor.close()
-conexao.close()
+cursor.close()                     # Fecha o cursor.
+conexao.close()                    # Fecha a conexão com o banco de dados.
 
