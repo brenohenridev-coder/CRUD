@@ -1,0 +1,44 @@
+import mysql.connector
+
+conexao = mysql.connector.connect(
+    host='localhost',
+    user='root',
+    password='********',
+    database='meu_banco'
+)
+
+cursor = conexao.cursor()
+
+print('---Sistema de Cadastro em Mysql.---')
+
+nome_usuario = input('Digit seu nome: ').strip()
+
+idade_usuario = str(input('Digite sua idade: '))
+
+email_usuario = str(input('Digite o seu email: ').strip())
+
+cpf_usuario = str(input('Digite o seu CPF: '))
+
+celular_usuario = str(input('Digite o seu celular: '))
+
+nascimento_usuario = str(input('Digite a sua data de nascimento, AAAA-MM-DD: '))
+
+comando_sql = 'INSERT INTO usuarios (nome, idade, email, cpf,celular, nascimento) VALUES (%s,%s,%s,%s,%s,%s)'
+
+dados = (
+    nome_usuario,
+    idade_usuario,
+    email_usuario,
+    cpf_usuario,
+    celular_usuario,
+    nascimento_usuario
+)
+
+cursor.execute(comando_sql,dados)
+conexao.commit()
+
+print(f"O Usuário {nome_usuario} foi cadastrado com sucesso!🎉")
+
+cursor.close()
+conexao.close()
+
